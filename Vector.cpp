@@ -58,7 +58,8 @@ double SerialVectorDotProduct(double* v1, double* v2, int size)
 // --------------------------------------------------
 // Parallel dot product using OpenMP
 // --------------------------------------------------
-double ParallelVectorDotProduct(double* v1, double* v2, int size)
+double ParallelVectorDotProduct(const vector<double>& v1,
+                              const vector<double>& v2, int size)
 {
     double result = 0.0;
 
@@ -84,31 +85,34 @@ void CheckResult(double serialResult, double parallelResult)
 
 int main()
 {
-    vector<int> sizes = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000};
+    vector<int> sizes = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
     vector<int> threadCounts = {2, 4};
 
     ofstream file("vector_dot_product.csv");
-    file << "Size,Threads,ExecutionType,Time,Speedup,Efficiency\n";
+    file << "Size,ExecutionType,Threads,Time,Speedup,Efficiency\n";
 
     printf("=== Parallel Vector Dot Product (OpenMP) ===\n");
+
+    srand(123); // fixed seed
 
     for (int size : sizes)
     {
         printf("\n--- Vector size = %d ---\n", size);
 
-        double* v1 = new double[size];
-        double* v2 = new double[size];
+        
+        vector<double> v1(size), v2(size);
+       
 
-        srand(123); // fixed seed
-        RandomVectorInitialization(v1, v2, size);
+        
+        RandomVectorInitialization(v1.data(), v2.data(), size);
 
         // ===== SERIAL RUN =====
         double start = GetTime();
-        double serialResult = SerialVectorDotProduct(v1, v2, size);
+        double serialResult = SerialVectorDotProduct(v1.data(), v2.data(), size);
         double finish = GetTime();
         double t_serial = finish - start;
 
-        file << size << ",1,Serial,"
+        file << size << ",Serial,1,"
              << t_serial << ",1.0,100\n";
 
         printf("Serial time: %f\n", t_serial);
@@ -126,18 +130,17 @@ int main()
             double speedup = t_serial / t_parallel;
             double efficiency = speedup / threads * 100.0;
 
-            file << size << ","
-                 << threads << ",Parallel,"
-                 << t_parallel << ","
-                 << speedup << ","
-                 << efficiency << "\n";
+              file << size << ",Parallel," << threads << ","
+         << t_parallel << ","
+         << speedup << ","
+         << efficiency << "\n";
+
 
             printf("Threads %d | Speedup %.2f | Efficiency %.2f%%\n",
                    threads, speedup, efficiency);
         }
 
-        delete[] v1;
-        delete[] v2;
+        
     }
 
     file.close();

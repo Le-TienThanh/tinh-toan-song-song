@@ -1,6 +1,3 @@
-import matplotlib.pyplot as plt
-import pandas as pd
-
 
 # ==================================================
 # Plotting Performance Metrics for Parallel Vector Dot Product
@@ -19,7 +16,7 @@ fig, axes = plt.subplots(1, 3, figsize=(18, 4))
 
 # --- Plot 1: Speedup vs Vector Size ---
 ax1 = axes[0]
-for t in [1, 2, 4]:
+for t in [ 2, 4]:
     subset = df[df['Threads'] == t].sort_values('Size')
     ax1.plot(subset['Size'], subset['Speedup'], marker='o', label=f'{t} Threads')
 ax1.set_title('Speedup vs Vector Size')
@@ -45,7 +42,7 @@ ax2.legend()
 
 # --- Plot 3: Efficiency vs Vector Size ---
 ax3 = axes[2]
-for t in [1, 2, 4]:
+for t in [ 2, 4]:
     subset = df[df['Threads'] == t].sort_values('Size')
     ax3.plot(subset['Size'], subset['Efficiency'], marker='^', label=f'{t} Threads')
 ax3.set_title('Efficiency vs Vector Size')

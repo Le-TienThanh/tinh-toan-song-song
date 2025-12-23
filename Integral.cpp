@@ -52,6 +52,7 @@ double GetTime() {
     return (double)lpPerfomanceCount.QuadPart / (double)lpFrequency.QuadPart;
 }
 
+
 int main() {
     double a = 0, b = 10;
     vector<long long int> N_values = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000};
