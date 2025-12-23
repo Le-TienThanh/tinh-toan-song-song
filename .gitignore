@@ -1,0 +1,69 @@
+# ===============================
+# Python
+# ===============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+ENV/
+
+# ===============================
+# C / C++
+# ===============================
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+*.dSYM/
+
+# ===============================
+# Build & temporary files
+# ===============================
+build/
+dist/
+tmp/
+temp/
+*.log
+
+# ===============================
+# Jupyter / Data science
+# ===============================
+.ipynb_checkpoints/
+
+# ===============================
+# VS Code
+# ===============================
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/c_cpp_properties.json
+
+# ===============================
+# OS-specific
+# ===============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===============================
+# Results / Outputs (optional)
+# ===============================
+*.png
+*.jpg
+*.pdf
+
+# ===============================
+# CSV results (CHỌN 1)
+# ===============================
+# ❌ Nếu KHÔNG muốn commit kết quả:
+# *.csv
+
+# ✅ Nếu MUỐN commit file dữ liệu:
+# (để trống phần này)
